@@ -353,6 +353,26 @@
       color: #444;
       margin-bottom: 0.7rem;
     }
+
+    .see-more-btn {
+                    display: inline-block;
+                    padding: 12px 32px;
+                     background: linear-gradient(90deg, var(--highlight) 0%, var(--accent) 100%);
+                    color: #fff;
+                    border: none;
+                    border-radius: 24px;
+                    font-size: 1.1em;
+                    font-weight: 600;
+                    text-decoration: none;
+                    box-shadow: 0 2px 8px rgba(44, 104, 255, 0.12);
+                    transition: background 0.3s, transform 0.2s;
+                    margin-top: 12px;
+                }
+                .see-more-btn:hover {
+                    background: linear-gradient(90deg, var(--highlight) 0%, var(--accent) 100%);
+                    transform: translateY(-3px) scale(1.04);
+                }
+
     .contact-form {
       max-width: 420px;
       margin: 0 auto;

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+    <meta charset="UTF-8">
+    <title>Our Products</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="media/logo.jpg">
+    <script src="index.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%);
+            font-family: 'Roboto', 'Montserrat', sans-serif;
+            color: #222;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        header {
+            text-align: center;
+            padding: 2.5rem 0 1.5rem 0;
+            letter-spacing: 2px;
+            font-size: 2.8rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+             background: linear-gradient(90deg, var(--highlight) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            --text-fill-color: transparent;
+            animation: fadeInDown 1s cubic-bezier(.77,0,.18,1.01);
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-60px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            padding: 2.5rem 2vw;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .project-card {
+            background: #fff;
+            border-radius: 22px;
+            box-shadow: 0 8px 32px 0 rgba(31,38,135,0.10);
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(.77,0,.18,1.01), box-shadow 0.4s, filter 0.3s;
+            cursor: pointer;
+            position: relative;
+            animation: fadeInUp 1s cubic-bezier(.77,0,.18,1.01);
+            will-change: transform, box-shadow;
+        }
+        .project-card:hover {
+            transform: translateY(-18px) scale(1.04) rotate(-1deg);
+            box-shadow: 0 20px 48px 0 rgba(56,189,248,0.18), 0 2px 16px 0 rgba(37,99,235,0.10);
+            filter: brightness(1.03) saturate(1.08);
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(60px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .project-image {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            transition: filter 0.5s cubic-bezier(.77,0,.18,1.01), transform 0.5s;
+            border-bottom: 2px solid #38bdf833;
+        }
+        .project-card:hover .project-image {
+            filter: brightness(0.95) blur(1px) grayscale(0.04);
+            transform: scale(1.03) rotate(1deg);
+        }
+        .project-info {
+            padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+            background: linear-gradient(120deg, #f8fafc 80%, #38bdf811 100%);
+            border-radius: 0 0 22px 22px;
+            transition: background 0.3s;
+        }
+        .project-title {
+            font-size: 1.5rem;
+            margin: 0 0 0.6rem 0;
+            color: #2563eb;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            text-shadow: 0 2px 8px #e0e7ef55;
+            transition: color 0.3s;
+        }
+        .project-desc {
+            font-size: 1.08rem;
+            color: #333;
+            margin-bottom: 1.2rem;
+            min-height: 48px;
+            line-height: 1.6;
+        }
+        .project-link {
+            display: inline-block;
+            padding: 0.6rem 1.4rem;
+             background: linear-gradient(90deg, var(--highlight) 0%, var(--accent) 100%);
+            color: #fff;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.05rem;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 12px rgba(56,189,248,0.13);
+            transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .project-link::after {
+            content: '';
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #fff3, #38bdf833 60%, #fff3);
+            transition: left 0.4s cubic-bezier(.77,0,.18,1.01);
+            z-index: 0;
+        }
+        .project-link:hover {
+            background: linear-gradient(90deg, #38bdf8, #2563eb);
+            transform: scale(1.07) rotate(-1deg);
+            box-shadow: 0 4px 24px rgba(56,189,248,0.18);
+        }
+        .project-link:hover::after {
+            left: 0;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(30,41,59,0.85);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.4s;
+        }
+        .modal-content {
+            background: linear-gradient(120deg, #f8fafc 80%, #38bdf811 100%);
+            border-radius: 20px;
+            padding: 2.5rem 2rem 2rem 2rem;
+            max-width: 650px;
+            width: 92vw;
+            color: #222;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 12px 40px 0 rgba(56,189,248,0.13);
+            animation: scaleIn 0.5s cubic-bezier(.77,0,.18,1.01);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0;}
+            to { opacity: 1;}
+        }
+        @keyframes scaleIn {
+            from { transform: scale(0.8);}
+            to { transform: scale(1);}
+        }
+        .modal-close {
+            position: absolute;
+            top: 1.2rem; right: 1.2rem;
+            background: none;
+            border: none;
+            color: #2563eb;
+            font-size: 2.2rem;
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+            z-index: 2;
+        }
+        .modal-close:hover {
+            color: #38bdf8;
+            transform: rotate(90deg) scale(1.2);
+        }
+        /* Modal image animation */
+        #modalBody img {
+            animation: modalImgIn 0.7s cubic-bezier(.77,0,.18,1.01);
+        }
+        @keyframes modalImgIn {
+            from { opacity: 0; transform: scale(0.92) translateY(40px);}
+            to { opacity: 1; transform: scale(1) translateY(0);}
+        }
+        /* Ripple effect override for blue theme */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-anim 0.6s linear;
+            background: rgba(56,189,248,0.18);
+            pointer-events: none;
+            width: 120px;
+            height: 120px;
+            z-index: 1;
+        }
+        @keyframes ripple-anim {
+            to {
+                transform: scale(2.5);
+                opacity: 0;
+            }
+        }
+        /* Responsive */
+        @media (max-width: 800px) {
+            .projects-grid { gap: 1.2rem; padding: 1.2rem 1vw;}
+            .modal-content { padding: 1.2rem 0.5rem 1rem 0.5rem; }
+        }
+        @media (max-width: 600px) {
+            header { font-size: 1.3rem; padding: 1.2rem 0 0.7rem 0;}
+            .project-info { padding: 0.7rem; }
+            .project-title { font-size: 1.05rem; }
+            .project-desc { font-size: 0.93rem; }
+            .project-image { height: 140px; }
+        }
+    </style>
+    <script>
+        // Animate cards on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.project-card');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    } else {
+                        entry.target.style.opacity = 0;
+                        entry.target.style.transform = 'translateY(60px)';
+                    }
+                });
+            }, { threshold: 0.15 });
+            cards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(60px)';
+                observer.observe(card);
+            });
+        });
+
+        // Ripple effect on project cards
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.project-card')) {
+                const card = e.target.closest('.project-card');
+                let ripple = document.createElement('span');
+                ripple.className = 'ripple';
+                ripple.style.left = (e.clientX - card.getBoundingClientRect().left) + 'px';
+                ripple.style.top = (e.clientY - card.getBoundingClientRect().top) + 'px';
+                card.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            }
+        });
+    </script>
+    <style>
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-anim 0.6s linear;
+            background: rgba(255,81,47,0.25);
+            pointer-events: none;
+            width: 120px;
+            height: 120px;
+            z-index: 1;
+        }
+        @keyframes ripple-anim {
+            to {
+                transform: scale(2.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>Our Amazing Products</header>
+    <div style="text-align:center; margin-bottom: 1.5rem;"></div>
+        <a href="index.html" class="project-link" style="font-size:1rem; padding:0.5rem 1.2rem; margin-top:0.5rem;">&#8592; Back to Home</a>
+    </div>
+    <section class="projects-grid">
+     <div class="products-list">
+      <div class="product-card">
+        <img src="media/product1.jpg" alt="4- wheeled Commode" class="product-img">
+        <div class="product-title">4- wheeled Commode</div>
+        <div class="product-desc">High-precision 12-lead ECG for accurate cardiac diagnostics.</div>
+        <a href="index.html#contact" class="btn" style="font-size:0.98rem;">Request Quote</a>
+      </div>
+      <div class="product-card">
+        <img src="media/product5.jpg" alt="4- wheeled Commode" class="product-img">
+        <div class="product-title">4- wheeled Commode</div>
+        <div class="product-desc">Multi-parameter monitor for vital signs with touchscreen display.</div>
+        <a href="index.html#contact" class="btn" style="font-size:0.98rem;">Request Quote</a>
+      </div>
+      <div class="product-card">
+        <img src="media/product6.jpg" alt="4- wheeled Commode" class="product-img">
+        <div class="product-title">4- wheeled Commode</div>
+        <div class="product-desc">Reliable infusion pump for precise fluid delivery in clinical settings.</div>
+        <a href="index.html#contact" class="btn" style="font-size:0.98rem;">Request Quote</a>
+      </div>
+      <div class="product-card">
+        <img src="media/products4.jpg" alt="Tripod" class="product-img">
+        <div class="product-title">Tripod</div>
+        <div class="product-desc">Portable stand for point-of-care imaging and diagnostics.</div>
+        <a href="index.html#contact" class="btn" style="font-size:0.98rem;">Request Quote</a>
+      </div>
+      <div class="product-card">
+        <img src="media/product2.jpg" alt="Wheelchair" class="product-img">
+        <div class="product-title">Wheelchair</div>
+        <div class="product-desc">Comfortable and durable wheelchair for patients with mobility challenges.</div>
+        <a href="index.html#contact" class="btn" style="font-size:0.98rem;">Request Quote</a>
+      </div>
+      <div class="product-card">
+        <img src="media/product3.jpg" alt="Ultrasound Scanner" class="product-img">
+        <div class="product-title">Ultrasound Scanner</div>
+        <div class="product-desc">Portable ultrasound for point-of-care imaging and diagnostics.</div>
+        <a href="index.html#contact" class="btn" style="font-size:0.98rem;">Request Quote</a>
+      </div>
+      <div class="product-card">
+        <img src="media/product7.jpg" alt="Stethoscope" class="product-img">
+        <div class="product-title">Stethoscope</div>
+        <div class="product-desc">High-quality stethoscope for accurate auscultation.</div>
+        <a href="index.html#contact" class="btn" style="font-size:0.98rem;">Request Quote</a>
+      </div>
+      <div class="product-card">
+        <img src="media/product8.jpg" alt="Hospital Bed" class="product-img">
+        <div class="product-title">Hospital Bed</div>
+        <div class="product-desc">Adjustable hospital bed for patient comfort and care.</div>
+        <a href="index.html#contact" class="btn" style="font-size:0.98rem;">Request Quote</a>
+      </div>
+      <div class="product-card">
+        <img src="media/product9.jpg" alt="Wheelchair" class="product-img">
+        <div class="product-title">Wheelchair</div>
+        <div class="product-desc">Comfortable and durable wheelchair for patients with mobility challenges.</div>
+        <a href="index.html#contact" class="btn" style="font-size:0.98rem;">Request Quote</a>
+      </div>
+      <div class="product-card">
+        <img src="media/product10.jpg" alt="Ultrasound Scanner" class="product-img">
+        <div class="product-title">Ultrasound Scanner</div>
+        <div class="product-desc">Portable ultrasound for point-of-care imaging and diagnostics.</div>
+        <a href="index.html#contact" class="btn" style="font-size:0.98rem;">Request Quote</a>
+      </div>
+      <div class="product-card">
+        <img src="media/product11.jpg" alt="4-Wheeled Walker" class="product-img">
+        <div class="product-title">4-Wheeled Walker</div>
+        <div class="product-desc">Sturdy and lightweight walker for enhanced mobility and support.</div>
+        <a href="index.html#contact" class="btn" style="font-size:0.98rem;">Request Quote</a>
+      </div>
+      <div class="product-card">
+        <img src="media/product12.jpg" alt="Infrared Bulb" class="product-img">
+        <div class="product-title">Infrared Bulb</div>
+        <div class="product-desc">High-quality infrared bulb for therapeutic heating and pain relief.</div>
+        <a href="index.html#contact" class="btn" style="font-size:0.98rem;">Request Quote</a>
+      </div>
+      <div class="product-card">
+        <img src="media/product13.jpg" alt="Dumbell" class="product-img">
+        <div class="product-title">Dumbell</div>
+        <div class="product-desc">High-quality dumbbells for strength training and fitness.</div>
+        <a href="index.html#contact" class="btn" style="font-size:0.98rem;">Request Quote</a>
+      </div>
+        <div class="product-card">
+        <img src="media/product14.jpg" alt="Hip Support" class="product-img">
+        <div class="product-title">Hip Support</div>
+        <div class="product-desc">High-quality hip support for enhanced mobility and comfort.</div>
+        <a href="index.html#contact" class="btn" style="font-size:0.98rem;">Request Quote</a>
+      </div>
+        <div class="product-card">
+        <img src="media/product15.jpg" alt="Bicycle Ergometer" class="product-img">
+        <div class="product-title">Bicycle Ergometer</div>
+        <div class="product-desc">High-quality bicycle ergometer for effective cardio workouts.</div>
+        <a href="index.html#contact" class="btn" style="font-size:0.98rem;">Request Quote</a>
+      </div>
+    </div>
+    </section>
+
+    <!-- Modal for project details -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content" id="modalContent">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        // Project details for modal
+        const projectDetails = [
+            {
+                title: "Portfolio Website",
+                image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80",
+                desc: "A modern, responsive portfolio website built with HTML, CSS, and JavaScript, featuring smooth animations and a clean design.",
+                link: "https://yourportfolio.com"
+            },
+            {
+                title: "E-commerce Store",
+                image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+                desc: "A full-featured e-commerce platform with product galleries, shopping cart, and secure checkout, built using React and Node.js.",
+                link: "https://yourecommerce.com"
+            },
+            {
+                title: "Blog Platform",
+                image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
+                desc: "A dynamic blog platform with markdown support, user authentication, and a beautiful editor, powered by Django.",
+                link: "https://yourblog.com"
+            }
+        ];
+
+        function showModal(index) {
+            const modal = document.getElementById('projectModal');
+            const modalBody = document.getElementById('modalBody');
+            const project = projectDetails[index];
+            modalBody.innerHTML = `
+                <img src="${project.image}" alt="${project.title}" style="width:100%;border-radius:12px;max-height:260px;object-fit:cover;margin-bottom:1rem;">
+                <h2 style="color:#ff512f;margin:0 0 1rem 0;">${project.title}</h2>
+                <p style="font-size:1.1rem;margin-bottom:1.5rem;">${project.desc}</p>
+                <a href="${project.link}" target="_blank" class="project-link">Visit Project</a>
+            `;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('projectModal').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        document.getElementById('projectModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") closeModal();
+        });
+    </script>
+</body>
+</html>
