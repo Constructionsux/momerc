@@ -159,10 +159,7 @@
     }
 }
 
-.showcase-icon .showcase-icon-main:hover {
-    box-shadow: 0 12px 36px rgba(44,104,255,0.18);
-    background: linear-gradient(180deg, #b7a85c 80%, #fffbe6 100%);
-}
+
 
 .hero {
       text-align: center;

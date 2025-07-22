@@ -8,9 +8,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/svg+xml" href="media/logo.jpg">
-  <script src="index.js">
-   
-  </script>
 </head>
 <body>
   <nav>
@@ -121,27 +118,27 @@
     <div class="section-title">Featured Products</div>
     <div class="products-list">
       <div class="product-card">
-        <img src="media/product1.jpg" alt="ECG Machine" class="product-img">
-        <div class="product-title">ECG Machine</div>
-        <div class="product-desc">High-precision 12-lead ECG for accurate cardiac diagnostics.</div>
+        <img src="media/product1.jpg" alt="4- wheeled Commode" class="product-img">
+        <div class="product-title">4- wheeled Commode</div>
+        <div class="product-desc">High-quality commode with four wheels for easy mobility.</div>
         <a href="#contact" class="btn" style="font-size:0.98rem;">Request Quote</a>
       </div>
       <div class="product-card">
-        <img src="media/product2.jpg" alt="Patient Monitor" class="product-img">
-        <div class="product-title">Patient Monitor</div>
-        <div class="product-desc">Multi-parameter monitor for vital signs with touchscreen display.</div>
+        <img src="media/product2.jpg" alt="Wheelchair" class="product-img">
+        <div class="product-title">Wheelchair</div>
+        <div class="product-desc">Comfortable wheelchair with adjustable features for patient mobility.</div>
         <a href="#contact" class="btn" style="font-size:0.98rem;">Request Quote</a>
       </div>
       <div class="product-card">
         <img src="media/product3.jpg" alt="Infusion Pump" class="product-img">
-        <div class="product-title">Infusion Pump</div>
-        <div class="product-desc">Reliable infusion pump for precise fluid delivery in clinical settings.</div>
-        <a href="#contact" class="btn" style="font-size:0.98rem;">Request Quote</a>
+        <!-- <div class="product-title">Infusion Pump</div> -->
+        <!-- <div class="product-desc">Reliable infusion pump for precise fluid delivery in clinical settings.</div> -->
+        <a href="#contact" class="btn" style="font-size:0.98rem; position: relative; top: 100px;">Request Quote</a>
       </div>
       <div class="product-card">
-        <img src="media/products4.jpg" alt="Ultrasound Scanner" class="product-img">
-        <div class="product-title">Ultrasound Scanner</div>
-        <div class="product-desc">Portable ultrasound for point-of-care imaging and diagnostics.</div>
+        <img src="media/products4.jpg" alt="Tripod" class="product-img">
+        <div class="product-title">Tripod</div>
+        <div class="product-desc">Sturdy tripod for stable imaging and diagnostics.</div>
         <a href="#contact" class="btn" style="font-size:0.98rem;">Request Quote</a>
       </div>
     </div>
@@ -162,41 +159,14 @@
     <div style="margin-top:2rem;text-align:center;">
       <b>Phone:</b> <a href="tel:+2348036781547" style="color:var(--accent);text-decoration:none;">+2348036781547</a><br>
       <b>Email:</b> <a href="mailto:momercmedical@gmail.com " style="color:var(--accent);text-decoration:none;">momercmedical@gmail.com </a><br>
-      <b>Location:</b> 123 Health Ave, Lagos, Nigeria
+      <!-- <b>Location:</b> 123 Health Ave, Lagos, Nigeria -->
     </div>
   </section>
 
   <div class="footer">
-    © 2024 MedEquipPro. All rights reserved.
+    © 2025 Momerc Health & Wellbeing. All rights reserved.
   </div>
 
-  <script>
-
-    // Smooth scroll for nav links
-    navLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        const targetId = this.getAttribute('href').slice(1);
-        const target = document.getElementById(targetId);
-        if (target) {
-          e.preventDefault();
-          window.scrollTo({
-            top: target.offsetTop - 60,
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-
-    // Contact form (demo, no backend)
-    document.querySelector('.contact-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const msg = document.getElementById('formMessage');
-      msg.textContent = "Sending...";
-      setTimeout(() => {
-        msg.textContent = "Thank you for contacting us! We'll get back to you soon.";
-        this.reset();
-      }, 1200);
-    });
-  </script>
+  <script src="index.js"></script>
 </body>
 </html>

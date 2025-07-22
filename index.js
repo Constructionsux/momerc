@@ -60,4 +60,15 @@
       });
     });
 
+     // Contact form (demo, no backend)
+    document.querySelector('.contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const msg = document.getElementById('formMessage');
+      msg.textContent = "Sending...";
+      setTimeout(() => {
+        msg.textContent = "Thank you for contacting us! We'll get back to you soon.";
+        this.reset();
+      }, 1200);
+    });
+
   
