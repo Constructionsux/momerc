@@ -147,7 +147,12 @@
     color: #fff;
     font-size: 20px;
 }
-
+.showcase-icon:hover{
+  background: linear-gradient(90deg, var(--highlight) 0%, var(--accent) 100%);
+}
+.showcase-icon .showcase-icon-main:hover{
+  background: linear-gradient(90deg, var(--highlight) 0%, var(--accent) 100%);
+}
 @keyframes showcaseSlideIn {
     from {
         transform: translateX(80px);
@@ -171,6 +176,19 @@
       font-size: 2.7rem;
       margin-bottom: 0.7rem;
       font-weight: 700;
+    }
+    @font-face{
+      font-family: 'MyCaligraphyFont';
+      src: url('media/MyCaligraphyFont.woff2') format('woff2'),
+           url('media/MyCaligraphyFont.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+     .hero .add {
+      font-size: 2.0rem;
+      margin-bottom: 0.7rem;
+      font-weight: 700;
+      font-family: 'MyCaligraphyFont', cursive;
     }
     .hero h2 {
       font-size: 1.5rem;
